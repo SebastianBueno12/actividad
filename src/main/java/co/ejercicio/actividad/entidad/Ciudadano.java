@@ -11,6 +11,7 @@ import lombok.*;
 @Builder
 @ToString
 public class Ciudadano {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -29,6 +30,5 @@ public class Ciudadano {
 
     @Column(nullable = false)
     private String telefono;
-
 }
 

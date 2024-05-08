@@ -1,48 +1,45 @@
 package co.ejercicio.actividad.servicio;
 
 import co.ejercicio.actividad.entidad.Ciudadano;
-import co.ejercicio.actividad.operaciones.operacionciudadano;
-import co.ejercicio.actividad.repositorio.repositoriociudadano;
+import co.ejercicio.actividad.operaciones.OperacionesCiudadano;
+import co.ejercicio.actividad.repositorio.RepositorioCiudadano;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
-public class ServiciosCiudadano implements operacionciudadano {
+public class ServiciosCiudadano implements OperacionesCiudadano {
 
     @Autowired
-    repositoriociudadano Repositoriociudadano;
+    private RepositorioCiudadano repositorioCiudadano;
 
     @Override
     public Ciudadano crear(Ciudadano ciudadano) {
-        return Repositoriociudadano.save(ciudadano);
+        return repositorioCiudadano.save(ciudadano);
     }
 
     @Override
     public Ciudadano actualizar(Ciudadano ciudadano) {
-        if (this.consultarPK(ciudadano.getCedula()) != null)
-            return Repositoriociudadano.save(ciudadano);
+        if (consultarPK(ciudadano.getId()) != null)
+            return repositorioCiudadano.save(ciudadano);
         return null;
     }
 
-
     @Override
     public void borrar(Ciudadano ciudadano) {
-        Repositoriociudadano.delete(ciudadano);
+        repositorioCiudadano.delete(ciudadano);
     }
 
     @Override
     public List<Ciudadano> consultarT() {
-        return Repositoriociudadano.findAll();
+        return repositorioCiudadano.findAll();
     }
 
     @Override
-    public Ciudadano consultarPK(String pk) {
-        return Repositoriociudadano.findById(Long.valueOf(pk)).orElse(null);
-
+    public Ciudadano consultarPK(Long id) {
+        return repositorioCiudadano.findById(id).orElse(null);
     }
-
 }
+
 

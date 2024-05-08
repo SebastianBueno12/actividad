@@ -4,17 +4,10 @@ import co.ejercicio.actividad.entidad.Ciudadano;
 
 import java.util.List;
 
-public interface operacionciudadano {
-
+public interface OperacionesCiudadano {
     public Ciudadano crear(Ciudadano ciudadano);
-
     public Ciudadano actualizar(Ciudadano ciudadano);
-
     public void borrar(Ciudadano ciudadano);
-
     public List<Ciudadano> consultarT();
-
-    public Ciudadano consultarPK(String pk);
+    public Ciudadano consultarPK(Long id);
 }
-
-

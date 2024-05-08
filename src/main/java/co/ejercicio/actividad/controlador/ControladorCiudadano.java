@@ -1,13 +1,12 @@
 package co.ejercicio.actividad.controlador;
 
 import co.ejercicio.actividad.entidad.Ciudadano;
-import co.ejercicio.actividad.operaciones.operacionciudadano;
+import co.ejercicio.actividad.operaciones.OperacionesCiudadano;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-//a
 import java.util.List;
 
 @Controller
@@ -15,11 +14,11 @@ import java.util.List;
 public class ControladorCiudadano {
 
     @Autowired
-    private operacionciudadano servicioCiudadano;
+    private OperacionesCiudadano operacionesCiudadano;
 
     @GetMapping("/listar")
     public String listarCiudadanos(Model model) {
-        List<Ciudadano> ciudadanos = servicioCiudadano.consultarT();
+        List<Ciudadano> ciudadanos = operacionesCiudadano.consultarT();
         model.addAttribute("ciudadanos", ciudadanos);
         return "ciudadanos/listar";
     }
@@ -32,27 +31,27 @@ public class ControladorCiudadano {
 
     @PostMapping("/guardar")
     public String guardarCiudadano(@ModelAttribute("ciudadano") Ciudadano ciudadano) {
-        servicioCiudadano.crear(ciudadano);
+        operacionesCiudadano.crear(ciudadano);
         return "redirect:/ciudadanos/listar";
     }
 
     @GetMapping("/editar/{id}")
     public String editarCiudadano(@PathVariable Long id, Model model) {
-        Ciudadano ciudadano = servicioCiudadano.consultarPK(String.valueOf(id));
+        Ciudadano ciudadano = operacionesCiudadano.consultarPK(id);
         model.addAttribute("ciudadano", ciudadano);
         return "ciudadanos/editar";
     }
 
     @PostMapping("/actualizar")
     public String actualizarCiudadano(@ModelAttribute("ciudadano") Ciudadano ciudadano) {
-        servicioCiudadano.actualizar(ciudadano);
+        operacionesCiudadano.actualizar(ciudadano);
         return "redirect:/ciudadanos/listar";
     }
 
     @GetMapping("/eliminar/{id}")
     public String eliminarCiudadano(@PathVariable Long id) {
-        Ciudadano ciudadano = servicioCiudadano.consultarPK(String.valueOf(id));
-        servicioCiudadano.borrar(ciudadano);
+        Ciudadano ciudadano = operacionesCiudadano.consultarPK(id);
+        operacionesCiudadano.borrar(ciudadano);
         return "redirect:/ciudadanos/listar";
     }
 }

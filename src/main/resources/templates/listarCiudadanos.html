@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Ciudadanos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <br>
+    <a class="btn btn-primary mb-3" href="#" th:href="@{/ciudadanos/crear}">Adicionar Ciudadano</a>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cédula</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ciudadano : ${ciudadanos}">
+            <td th:text="${ciudadano.id}">-</td>
+            <td th:text="${ciudadano.nombre}">-</td>
+            <td th:text="${ciudadano.apellido}">-</td>
+            <td th:text="${ciudadano.cedula}">-</td>
+            <td th:text="${ciudadano.direccion}">-</td>
+            <td th:text="${ciudadano.telefono}">-</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-secondary" href="#" th:href="@{http://localhost:8862/}">Volver</a>
+</div>
+</body>
+</html>
